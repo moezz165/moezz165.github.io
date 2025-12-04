@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ELEGANZA - Grå Hoodie UNISEX</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="produkt-sida.css" />
+</head>
+
+<body>
+    <header class="sido-runrik">
+        <h1 class="brand">ELEGANZA</h1>
+        <p class="slogan">DRESS FOR CONFIDENCE</p>
+    </header>
+    <nav class="main-nav">
+        <a href="index.html">Hem</a>
+        <a href="produkter.html">Produkter</a>
+        <a href="kundvagn.html">Kundvagn</a>
+        <a href="betalning.html">Betalning</a>
+        <a href="om-oss.html">Om oss</a>
+        <a href="policy.html">Policy</a>
+        <a href="kontakt.html">Kontakt</a>
+    </nav>
+
+    <main class="produkt-container">
+        <div class="breadcrumbs">
+            <a href="produkter.html">Produkter</a> / <span>Hoodie UNISEX (Grå)</span>
+        </div>
+
+        <section class="produkt-detaljer">
+            <div class="produkt-bilder">
+                <img src="IMG_0716 copy.JPG" alt="Hoodie grå UNISEX" class="huvudbild" />
+            </div>
+
+            <div class="produkt-info">
+                <hgroup>
+                    <h2 class="produkt-titel">Hoodie UNISEX</h2>
+                    <p class="produkt-kategori">Huvtröjor & Streetwear</p>
+                </hgroup>
+                
+                <p class="produkt-pris">399 kr</p>
+
+                <div class="valjare farg-valjare">
+                    <h4>Färg: <span id="vald-farg">Grå</span></h4>
+                    <div class="valj-alternativ">
+                        <button class="farg-knapp" style="background-color: black; border: 2px solid white;" data-farg="Svart" aria-label="Välj svart färg"></button>
+                        <button class="farg-knapp aktiv" style="background-color: #A9A9A9; border: 2px solid black;" data-farg="Grå" aria-label="Välj grå färg"></button>
+                    </div>
+                </div>
+
+                <div class="valjare storleks-valjare">
+                    <div class="storlek-header">
+                        <h4>Välj storlek</h4>
+                        <a href="storleksguide.html" class="storleksguide-lank">Storleksguide</a>
+                    </div>
+                    <div class="valj-alternativ">
+                        <button class="storlek-knapp" aria-label="Välj storlek S">S</button>
+                        <button class="storlek-knapp aktiv" aria-label="Välj storlek M">M</button>
+                        <button class="storlek-knapp" aria-label="Välj storlek L">L</button>
+                        <button class="storlek-knapp" aria-label="Välj storlek XL">XL</button>
+                    </div>
+                </div>
+
+                <button class="btn-laggtill">Lägg till i kundvagn</button>
+                <p class="leverans-info">Fri frakt över 500 kr</p>
+                <p class="leverans-info">Leverans inom 2-5 arbetsdagar</p>
+
+                <div class="produkt-beskrivning">
+                    <h3>Enkel och bekväm i tidlös grå</h3>
+                    <p>
+                        Denna grå hoodie är ett utmärkt komplement till din avslappnade garderob. 
+                        Samma mjuka fleece och generösa passform som den svarta modellen, nu i en klassisk melerad grå nyans.
+                    </p>
+                    <ul>
+                        <li>Borstad fleece på insidan.</li>
+                        <li>Dubbelskiktad huva med dragsko.</li>
+                        <li>Känguruficka fram.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="ytterligare-info">
+            <div class="detalj-block">
+                <h3>Specifikationer</h3>
+                <p>Material: 80% Bomull, 20% Polyester.</p>
+            </div>
+            <div class="detalj-block">
+                <h3>Passform & Storlek</h3>
+                <p>Oversized/Relaxed Fit (Unisex).</p>
+            </div>
+            <div class="detalj-block">
+                <h3>Returer & Byte</h3>
+                <p>30 dagars öppet köp. Se vår <a href="policy.html">returpolicy</a> för mer information.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        </footer>
+    <script>
+    </script>
+    <div id="popup-cart" class="popup">
+  <div class="popup-content">
+    <p>Produkten har lagts i kundvagnen!</p>
+    <button id="close-cart-popup">Stäng</button>
+  </div>
+</div>
+
+<div id="popup-checkout" class="popup">
+  <div class="popup-content">
+    <p>Tack för ditt köp! En bekräftelse har skickats till <span id="email-confirm"></span>.</p>
+    <button id="close-checkout-popup">Stäng</button>
+  </div>
+</div>
+
+</body>
+
+</html>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const CART_STORAGE_KEY = 'shoppingCart';
+
+            function getCart() {
+                try {
+                    const cart = JSON.parse(localStorage.getItem(CART_STORAGE_KEY));
+                    return Array.isArray(cart) ? cart : [];
+                } catch {
+                    return [];
+                }
+            }
+
+            function saveCart(cart) {
+                localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+            }
+
+            function showPopup(message, className) {
+                const existingPopup = document.getElementById('dynamic-popup');
+                if (existingPopup) existingPopup.remove();
+
+                const popup = document.createElement('div');
+                popup.id = 'dynamic-popup';
+                popup.classList.add(className);
+                popup.textContent = message;
+                document.body.appendChild(popup);
+
+                setTimeout(() => {
+                    popup.remove();
+                }, 3000);
+            }
+
+            document.querySelectorAll('.farg-knapp').forEach(button => {
+                button.addEventListener('click', function() {
+                    document.querySelectorAll('.farg-knapp').forEach(btn => btn.classList.remove('aktiv'));
+                    this.classList.add('aktiv');
+                    const valdFargElement = document.getElementById('vald-farg');
+                    if (valdFargElement) valdFargElement.textContent = this.dataset.farg;
+                });
+            });
+
+            document.querySelectorAll('.storlek-knapp').forEach(button => {
+                if (!button.disabled) {
+                    button.addEventListener('click', function() {
+                        document.querySelectorAll('.storlek-knapp').forEach(btn => btn.classList.remove('aktiv'));
+                        this.classList.add('aktiv');
+                    });
+                }
+            });
+
+            const addToCartButton = document.querySelector('.btn-laggtill');
+            if (addToCartButton) {
+                addToCartButton.addEventListener('click', () => {
+                    const selectedSize = document.querySelector('.storlek-knapp.aktiv');
+                    const selectedColor = document.querySelector('.farg-knapp.aktiv');
+                    const productTitle = document.querySelector('.produkt-titel')?.textContent || 'Okänd Produkt';
+                    const productPrice = document.querySelector('.produkt-pris')?.textContent || '0 SEK';
+
+                    if (!selectedSize || !selectedColor) {
+                        alert('Vänligen välj både färg och storlek innan du lägger till i kundvagnen.');
+                        return;
+                    }
+
+                    const item = {
+                        id: Date.now(),
+                        name: productTitle,
+                        size: selectedSize.textContent.trim(),
+                        color: selectedColor.dataset.farg,
+                        price: productPrice,
+                        quantity: 1
+                    };
+
+                    const cart = getCart();
+                    cart.push(item);
+                    saveCart(cart);
+
+                    showPopup('Produkten har lagts till i kundvagnen!', 'produkt-köpt');
+                });
+            }
+        });
+    </script>

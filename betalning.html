@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ELEGANZA - Betalning</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+.popup-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.popup-box {
+  background-color: white;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 20px black;
+
+  width: auto;              
+  max-width: 90%;           
+  min-width: 300px;         
+  max-height: 80vh;         
+  overflow-y: auto;         
+}
+
+.popup-box h3 {
+  margin-bottom: 20px;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 600;
+  font-size: 1.5em;
+  color: black;
+  word-wrap: break-word;    
+}
+
+.popup-box button {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.popup-box button:hover {
+  background-color: turquoise;
+}
+
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <h1 class="brand">ELEGANZA</h1>
+    <p class="slogan">DRESS FOR CONFIDENCE</p>
+  </header>
+
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kontakt - ELEGANZA</title>
+  <!-- Lägg in stylen här -->
+</head>
+<body>
+  <div class="container">
+    <h1>Kontakt</h1>
+    <p>Har du frågor? Fyll i formuläret nedan så återkommer vi så snart som möjligt.</p>
+    
+    <form id="contactForm">
+      <label for="name">Namn:</label>
+      <input type="text" id="name" required>
+      
+      <label for="email">E-post:</label>
+      <input type="email" id="email" required>
+      
+      <label for="message">Meddelande:</label>
+      <textarea id="message" required></textarea>
+      
+      <button type="submit">Skicka meddelande</button>
+    </form>
+
+    <a href="index.html" class="back-link">← Tillbaka till startsidan</a>
+  </div>
+
+  <script>
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      alert("Tack! Ditt meddelande har skickats.");
+      form.reset();
+    });
+  </script>
+</body>
+</html>
+
+<br><br>
+  <main class="container">
+    <h2>Betalning</h2>
+    <br>
+    <form id="payForm" class="payform">
+      <input type="text" placeholder="Namn" required>
+      <input type="text" placeholder="Email"required name="email">
+      <input type="text" placeholder="Kortnummer" required>
+      <input type="text" placeholder="Giltighetstid" required>
+      <input type="text" placeholder="CVC" required>
+      <button type="submit">Betala</button>
+    </form>
+  </main>
+<div class="popup-overlay" id="popup">
+  <div class="popup-box">
+      <h3></h3>
+    <button onclick="window.location.href='index.html'">Hem</button>
+  </div>
+</div>
+<footer class="footer">
+   <h3>Kontakt</h3>
+    <br>
+    <p>Kontaktperson: Mohannad Zkhoul</p>
+    <br>
+    <a href="mailto:eleganzaforconfidence@gmail.com"> Mejl: eleganzaforconfidence@gmail.com</a></p>
+    <br>
+   <a href="telefonnummer">telefon: 073123409</a>
+ <br> <br>
+    <p>hör av dig vid önskemål eller frågor!</p>
+  </footer>
+
+  <script>
+    // När formuläret skickas
+    document.getElementById("payForm").addEventListener("submit", function (e) {
+      e.preventDefault(); // Stoppar sidan från att laddas om
+      localStorage.clear(); // Tömmer kundvagnen
+      updateCart && updateCart(); // Uppdaterar kundvagnen om funktionen finns
+      document.getElementById("popup").style.display = "flex"; // Visa popup
+      email = document.querySelector('input[name="email"]').value;
+      document.getElementById("popup").querySelector("h3").innerHTML =
+         "Tack för ditt köp!<br>En bekräftelse har skickats till " + email;
+    });
+  </script>
+  <script src="script.js"></script>
+</body>
+
+</html>
