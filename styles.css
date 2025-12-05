@@ -1,9 +1,11 @@
+/* Global Reset and Box Sizing */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* CSS Variables for Theme */
 :root {
     --accent: #a8dadc;
     --muted: #2c2c2c;
@@ -15,8 +17,13 @@
     --label-color: #adb5bd;
     --font-family: 'Times New Roman', Times, serif;
     --nike-price: #cc0000;
+    --success-bg: var(--card);
+    --success-text: var(--accent);
+    --success-border: var(--accent);
+    --success-shadow-glow: rgba(168, 218, 220, 0.6);
 }
 
+/* Body Styling */
 body {
     font-family: var(--font-family);
     color: var(--text-light);
@@ -37,6 +44,7 @@ body:has(.product-detail-container) {
     min-height: 100vh;
 }
 
+/* Keyframe Animations */
 @keyframes gradientMove {
     0% {
         background-position: 0% 100%;
@@ -58,6 +66,7 @@ body:has(.product-detail-container) {
     }
 }
 
+/* Header Section (sido-runrik) */
 .sido-runrik {
     background: linear-gradient(90deg, #222222, var(--card), #222222);
     color: var(--accent);
@@ -84,6 +93,7 @@ body:has(.product-detail-container) {
     color: var(--label-color);
 }
 
+/* Main Navigation */
 .main-nav {
     display: flex;
     gap: 1rem;
@@ -115,6 +125,7 @@ body:has(.product-detail-container) {
     transform: translateY(-3px);
 }
 
+/* Main Content Area */
 main {
     flex: 1;
     max-width: 1300px;
@@ -125,6 +136,7 @@ main {
     animation: fadeIn 1.5s ease-in-out;
 }
 
+/* Introduction Section */
 .intruduktion {
     max-width: 1200px;
     margin: 2rem auto;
@@ -132,6 +144,7 @@ main {
     color: #d1d5db;
 }
 
+/* General Button Styling */
 .btn,
 .add-to-cart {
     display: inline-block;
@@ -155,6 +168,7 @@ main {
     box-shadow: 0 0 15px var(--accent);
 }
 
+/* Popular Products Section */
 .populära {
     padding: 2rem 1rem;
     max-width: 1400px;
@@ -174,6 +188,7 @@ main {
     gap: 2.5rem;
 }
 
+/* Product Grid */
 .produkter {
     display: grid;
     gap: 2rem;
@@ -182,6 +197,7 @@ main {
     align-items: stretch;
 }
 
+/* Product Card Styling */
 .card {
     background: var(--card);
     border-radius: 30px;
@@ -221,6 +237,7 @@ img:hover {
     transition: transform 0.3s ease;
 }
 
+/* 'Check it out' Button on Cards */
 .card .btn-kolla {
     margin-top: 1rem;
     display: inline-block;
@@ -250,8 +267,7 @@ img:hover {
     box-shadow: 0 2px 5px rgba(168, 218, 220, 0.5);
 }
 
-/* START: Nike-inspirerad Produktsida Styling */
-
+/* Product Detail Page Layout */
 .produkt-container {
     max-width: 1200px;
     margin: 3rem auto;
@@ -259,6 +275,7 @@ img:hover {
     animation: fadeIn 1.5s ease-in-out;
 }
 
+/* Breadcrumbs */
 .breadcrumbs {
     font-size: 0.9em;
     color: #999;
@@ -307,6 +324,7 @@ img:hover {
     box-shadow: none;
 }
 
+/* Product Information Block */
 .produkt-info {
     flex: 0 0 400px;
     padding: 0;
@@ -338,6 +356,7 @@ img:hover {
     color: var(--accent);
 }
 
+/* Selectors (Color/Size) */
 .valjare {
     margin-bottom: 30px;
 }
@@ -354,6 +373,7 @@ img:hover {
     gap: 10px;
 }
 
+/* Color Buttons */
 .farg-knapp {
     width: 45px;
     height: 45px;
@@ -371,6 +391,7 @@ img:hover {
     box-shadow: 0 0 0 3px var(--accent);
 }
 
+/* Size Selector Header and Link */
 .storlek-header {
     display: flex;
     justify-content: space-between;
@@ -388,6 +409,7 @@ img:hover {
     color: var(--text-light);
 }
 
+/* Size Buttons */
 .storlek-knapp {
     padding: 12px 18px;
     border: 2px solid var(--muted);
@@ -420,6 +442,7 @@ img:hover {
     border-color: var(--muted);
 }
 
+/* Add to Cart Button */
 .btn-laggtill {
     width: 100%;
     padding: 15px;
@@ -442,6 +465,7 @@ img:hover {
     box-shadow: 0 0 15px var(--accent);
 }
 
+/* Delivery Info */
 .leverans-info {
     font-size: 0.9em;
     color: #999;
@@ -449,6 +473,7 @@ img:hover {
     text-align: left;
 }
 
+/* Product Description */
 .produkt-beskrivning {
     margin-top: 40px;
 }
@@ -478,6 +503,7 @@ img:hover {
     margin-bottom: 5px;
 }
 
+/* Additional Info/Collapsibles */
 .ytterligare-info {
     border-top: 1px solid var(--muted);
     margin-top: 50px;
@@ -503,8 +529,7 @@ img:hover {
     color: var(--label-color);
 }
 
-/* END: Nike-inspirerad Produktsida Styling */
-
+/* Payment Form */
 .payform {
     display: flex;
     flex-direction: column;
@@ -544,6 +569,7 @@ img:hover {
     box-shadow: 0 0 15px var(--accent);
 }
 
+/* Footer */
 .footer {
     background: var(--dark);
     color: var(--accent);
@@ -566,28 +592,33 @@ img:hover {
     text-decoration: underline;
 }
 
+/* Professional Product Confirmation Popup (produkt-köpt) */
 .produkt-köpt {
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: #0f5132;
-    color: var(--accent);
+    background: var(--success-bg);
+    color: var(--success-text);
     z-index: 100000;
     width: 50%;
-    height: 50%;
-    opacity: 0.95;
+    max-width: 400px;
+    min-height: 200px;
+    opacity: 0.98;
     border-radius: 15px;
-    box-shadow: 0 0 40px #198754;
+    box-shadow: 0 0 30px var(--shadow), 0 0 15px var(--success-shadow-glow);
+    border: 2px solid var(--success-border);
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 700;
     text-align: center;
-    padding: 1rem;
+    padding: 2rem;
+    animation: fadeIn 0.5s ease-in-out;
 }
 
+/* General Popup Overlay */
 .popup-overlay {
     position: fixed;
     top: 0;
@@ -603,6 +634,7 @@ img:hover {
     -webkit-backdrop-filter: blur(4px);
 }
 
+/* Generic Container (for pages/forms) */
 .container {
     max-width: 900px;
     margin: 3rem auto;
@@ -647,6 +679,7 @@ img:hover {
     color: var(--accent);
 }
 
+/* Form Styling */
 #productForm {
     display: flex;
     flex-direction: column;
@@ -707,6 +740,7 @@ img:hover {
     transform: translateY(1px);
 }
 
+/* Back Link */
 .back-link {
     display: inline-block;
     margin-top: 1.5rem;
@@ -722,6 +756,7 @@ img:hover {
     text-decoration: underline;
 }
 
+/* Notification Popup (bottom right) */
 #popup {
     position: fixed;
     bottom: 20px;
@@ -744,6 +779,7 @@ img:hover {
     transform: translateY(0);
 }
 
+/* Responsive Design */
 @media (min-width: 768px) {
     .main-nav {
         display: flex;
@@ -776,7 +812,6 @@ img:hover {
 }
 
 @media (max-width: 768px) {
-    /* Anpassning för produktsidan på mobil */
     .produkt-detaljer {
         flex-direction: column;
         gap: 20px;
@@ -837,44 +872,65 @@ img:hover {
         padding: 1.5rem;
     }
 }
+
+/* Professional & Themed Popup (Modal) Styling */
 .popup {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.6);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.85);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
 }
 
 .popup.show {
-  display: flex;
+    display: flex;
 }
 
 .popup-content {
-  background: white;
-  padding: 25px 35px;
-  border-radius: 8px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  text-align: center;
-  font-size: 1.2em;
-  color: var(--text-dark);
-  max-width: 90%;
-  width: 400px;
+    background: var(--card);
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px var(--shadow), 0 0 20px var(--accent-dark);
+    text-align: center;
+    font-size: 1.3em;
+    color: var(--text-light);
+    max-width: 90%;
+    width: 450px;
+    border: 2px solid var(--accent);
+    animation: fadeIn 0.3s ease-out;
+}
+
+.popup-content h3 {
+    color: var(--accent);
+    font-size: 1.8em;
+    margin-bottom: 0.5em;
+    font-weight: 800;
+}
+
+.popup-content p {
+    margin-bottom: 25px;
+    color: var(--label-color);
+    font-size: 1em;
 }
 
 .popup-content button {
-  margin-top: 20px;
-  background: var(--primary-color);
-  border: none;
-  color: white;
-  padding: 10px 25px;
-  border-radius: 25px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
+    margin-top: 15px;
+    background: var(--accent);
+    border: none;
+    color: var(--dark);
+    padding: 12px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1em;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, color 0.3s, box-shadow 0.3s;
 }
 
 .popup-content button:hover {
-  background: #C2185B;
+    background: var(--dark);
+    color: var(--accent);
+    box-shadow: 0 0 15px var(--accent);
 }

@@ -7,6 +7,46 @@
   <title>ELEGANZA - Hem</title>
   <link rel="stylesheet" href="styles.css">
 
+  <style>
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      color: #333;
+      padding: 25px 40px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      font-size: 18px;
+      display: none;
+      z-index: 1000;
+      animation: fadeInOut 2s ease forwards;
+    }
+
+    @keyframes fadeInOut {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+      }
+
+      10%,
+      90% {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+      }
+
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -40%);
+      }
+    }
+
+    .popup.show {
+      display: block;
+    }
+  </style>
 </head>
 
 <body>
@@ -21,8 +61,8 @@
     <a href="produkter.html">Produkter</a>
     <a href="kundvagn.html">Kundvagn</a>
     <a href="betalning.html">Betalning</a>
-    <a href="om-oss.html">Om oss</a>
-    <a href="policy.html">Policy</a>
+        <a href="policy.html">policy</a>
+    <a href="om-oss.html">om oss</a>
     <a href="kontakt.html">kontakt</a>
   </nav>
 
@@ -40,6 +80,7 @@
       <h2>Populära klädesplagg</h2>
       <br><br>
       <div class="produkter">
+
         <div class="card">
           <img src="https://m.media-amazon.com/images/I/71GpU8wfY5L._UY1000_.jpg" alt="Tracksuit unisex">
           <br>
@@ -47,19 +88,16 @@
           <br>
           <p>Vit, grå, svart – 950kr</p>
           <br>
-          <button class="add-to-cart" data-name="Tracksuit unisex" data-price="950">Lägg till i kundvagn</button>
+          <a href="produkt-tracksuit.html" class="btn">Kolla</a>
         </div>
 
-        <div class="card">
-          <img src="https://www.jhnsport.se/wp-content/uploads/2022/05/178336181-origpic-d45552-1024x1024.jpg"
-            alt="Byxor unisex">
-          <br>
-          <h3>Byxor unisec</h3>
-          <br>
-          <p>Vit, grå, svart – 450kr</p>
-          <br>
-          <button class="add-to-cart" data-name="Byxor unisex" data-price="450">Lägg till i kundvagn</button>
-        </div>
+      <div class="card">
+        <img src="image copy 2.png" alt="Skor Herr" />
+        <h3>Skor Herr</h3>
+        <p>Svart – 1099kr</p>
+        <a href="produkt-skor.html" class="btn-kolla">Kolla</a>
+      </div>
+
       </div>
     </section>
   </main>
@@ -71,9 +109,28 @@
     <a href="telefonnummer">Telefon: 073123409</a><br><br>
     <p>Hör av dig vid önskemål eller frågor!</p>
   </footer>
+
   <div id="popup" class="popup">Tack! Varan finns nu i kundvagnen!</div>
 
-  <link rel="script" href="script.js">
- v</body>
+  <script>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const popup = document.getElementById("popup");
 
+    function showPopup() {
+      popup.classList.add("show");
+      setTimeout(() => popup.classList.remove("show"), 2000);
+    }
+
+    document.querySelectorAll(".add-to-cart").forEach(button => {
+      button.addEventListener("click", () => {
+        const name = button.getAttribute("data-name");
+        const price = parseInt(button.getAttribute("data-price"));
+        cart.push({ name, price });
+        localStorage.setItem("cart", JSON.stringify(cart));
+        showPopup();
+      });
+    });
+  </script>
+
+</body>
 </html>
