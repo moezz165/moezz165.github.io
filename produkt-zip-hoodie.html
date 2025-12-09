@@ -14,24 +14,16 @@
         <h1 class="brand">ELEGANZA</h1>
         <p class="slogan">DRESS FOR CONFIDENCE</p>
     </header>
-    <nav class="main-nav">
-        <a href="index.html">Hem</a>
-        <a href="produkter.html">Produkter</a>
-        <a href="kundvagn.html">Kundvagn</a>
-        <a href="betalning.html">Betalning</a>
-        <a href="om-oss.html">Om oss</a>
-        <a href="policy.html">Policy</a>
-        <a href="kontakt.html">Kontakt</a>
-    </nav>
+  <script src="navbar.js" defer></script>
 
     <main class="produkt-container">
         <div class="breadcrumbs">
-            <a href="produkter.html">Produkter</a> / <span>Zip Hoodie Herr</span>
+            <a href="produkter-600.html">Produkter</a> / <span>Zip Hoodie Herr</span>
         </div>
 
         <section class="produkt-detaljer">
             <div class="produkt-bilder">
-                <img src="image copy 3.png" alt="Zip Hoodie Herr" class="huvudbild" />
+                <img src="zipup-600.WebP" alt="Zip Hoodie Herr" class="huvudbild" />
             </div>
 
             <div class="produkt-info">
@@ -98,90 +90,8 @@
         </section>
 
     </main>
-
-    <footer class="footer">
-        </footer>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const CART_STORAGE_KEY = 'shoppingCart';
-
-            function getCart() {
-                try {
-                    const cart = JSON.parse(localStorage.getItem(CART_STORAGE_KEY));
-                    return Array.isArray(cart) ? cart : [];
-                } catch {
-                    return [];
-                }
-            }
-
-            function saveCart(cart) {
-                localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
-            }
-
-            function showPopup(message, className) {
-                const existingPopup = document.getElementById('dynamic-popup');
-                if (existingPopup) existingPopup.remove();
-
-                const popup = document.createElement('div');
-                popup.id = 'dynamic-popup';
-                popup.classList.add(className);
-                popup.textContent = message;
-                document.body.appendChild(popup);
-
-                setTimeout(() => {
-                    popup.remove();
-                }, 3000);
-            }
-
-            document.querySelectorAll('.farg-knapp').forEach(button => {
-                button.addEventListener('click', function() {
-                    document.querySelectorAll('.farg-knapp').forEach(btn => btn.classList.remove('aktiv'));
-                    this.classList.add('aktiv');
-                    const valdFargElement = document.getElementById('vald-farg');
-                    if (valdFargElement) valdFargElement.textContent = this.dataset.farg;
-                });
-            });
-
-            document.querySelectorAll('.storlek-knapp').forEach(button => {
-                if (!button.disabled) {
-                    button.addEventListener('click', function() {
-                        document.querySelectorAll('.storlek-knapp').forEach(btn => btn.classList.remove('aktiv'));
-                        this.classList.add('aktiv');
-                    });
-                }
-            });
-
-            const addToCartButton = document.querySelector('.btn-laggtill');
-            if (addToCartButton) {
-                addToCartButton.addEventListener('click', () => {
-                    const selectedSize = document.querySelector('.storlek-knapp.aktiv');
-                    const selectedColor = document.querySelector('.farg-knapp.aktiv');
-                    const productTitle = document.querySelector('.produkt-titel')?.textContent || 'Okänd Produkt';
-                    const productPrice = document.querySelector('.produkt-pris')?.textContent || '0 SEK';
-
-                    if (!selectedSize || !selectedColor) {
-                        alert('Vänligen välj både färg och storlek innan du lägger till i kundvagnen.');
-                        return;
-                    }
-
-                    const item = {
-                        id: Date.now(),
-                        name: productTitle,
-                        size: selectedSize.textContent.trim(),
-                        color: selectedColor.dataset.farg,
-                        price: productPrice,
-                        quantity: 1
-                    };
-
-                    const cart = getCart();
-                    cart.push(item);
-                    saveCart(cart);
-
-                    showPopup('Produkten har lagts till i kundvagnen!', 'produkt-köpt');
-                });
-            }
-        });
-    </script>
+<script src="footer.js" defer></script>
+<script src="produkt.js" defer></script>
     
 </body>
 

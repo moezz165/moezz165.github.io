@@ -7,26 +7,6 @@
     <title>ELEGANZA - Jacka Herr</title>
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="produkt-sida.css" />
-    <style>
-        #dynamic-popup {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: var(--primary-color, #E91E63);
-            color: white;
-            padding: 15px 25px;
-            border-radius: 5px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            font-weight: bold;
-            z-index: 10000;
-            opacity: 0.95;
-            font-family: Arial, sans-serif;
-            user-select: none;
-        }
-        #dynamic-popup.produkt-köpt {
-            background-color: var(--primary-color, #E91E63);
-        }
-    </style>
 </head>
 
 <body>
@@ -34,15 +14,7 @@
         <h1 class="brand">ELEGANZA</h1>
         <p class="slogan">DRESS FOR CONFIDENCE</p>
     </header>
-    <nav class="main-nav">
-        <a href="index.html">Hem</a>
-        <a href="produkter.html">Produkter</a>
-        <a href="kundvagn.html">Kundvagn</a>
-        <a href="betalning.html">Betalning</a>
-        <a href="om-oss.html">Om oss</a>
-        <a href="policy.html">Policy</a>
-        <a href="kontakt.html">Kontakt</a>
-    </nav>
+    <script src="navbar.js" defer></script>
 
     <main class="produkt-container">
         <div class="breadcrumbs">
@@ -51,13 +23,13 @@
 
         <section class="produkt-detaljer">
             <div class="produkt-bilder">
-                <img src="ChatGPT Image 3 dec. 2025 10_38_39.png" alt="Jacka Herr" class="huvudbild" />
+                <img src="jacka-600.WebP" alt="Jacka Herr" class="huvudbild" />
             </div>
 
             <div class="produkt-info">
                 <hgroup>
                     <h2 class="produkt-titel">Jacka Herr</h2>
-                    <p class="produkt-kategori">Ytterkläder & Höstmode</p>
+                    <p class="produkt-kategori">Ytterkläder & Jackor</p>
                 </hgroup>
                 
                 <p class="produkt-pris">1100 kr</p>
@@ -66,8 +38,8 @@
                     <h4>Färg: <span id="vald-farg">Svart</span></h4>
                     <div class="valj-alternativ">
                         <button class="farg-knapp aktiv" style="background-color: black; border: 2px solid white;" data-farg="Svart" aria-label="Välj svart färg"></button>
-                        <button class="farg-knapp" style="background-color: #ADD8E6;" data-farg="Ljusblå" aria-label="Välj ljusblå färg"></button>
-                        <button class="farg-knapp" style="background-color: #696969;" data-farg="Mörkgrå" aria-label="Välj mörkgrå färg"></button>
+                        <button class="farg-knapp" style="background-color: lightblue;" data-farg="Ljusblå" aria-label="Välj ljusblå färg"></button>
+                        <button class="farg-knapp" style="background-color: darkslategrey;" data-farg="Mörkgrå" aria-label="Välj mörkgrå färg"></button>
                     </div>
                 </div>
 
@@ -84,20 +56,21 @@
                     </div>
                 </div>
 
-                <button class="btn-laggtill">Lägg till i kundvagn</button>
-                <p class="leverans-info">Fri frakt!</p>
+                <button class="btn btn-laggtill">Lägg till i kundvagn</button>
+                
+                <p class="leverans-info">Fri frakt över 500 kr</p>
                 <p class="leverans-info">Leverans inom 2-5 arbetsdagar</p>
 
                 <div class="produkt-beskrivning">
-                    <h3>Den ultimata vardagsjackan</h3>
+                    <h3>Premium Jacka för Herr</h3>
                     <p>
-                        En tidlös och funktionell jacka som håller dig skyddad från väder och vind. 
-                        Designad med en ren siluett och diskreta fickor för en elegant look. Perfekt för övergångsperioderna.
+                        Denna jacka kombinerar elegans med praktisk funktionalitet. Den är designad för att stå emot
+                        väder och vind samtidigt som den behåller en modern, stilren look som passar både till vardags och mer dressade tillfällen.
                     </p>
                     <ul>
                         <li>Vattenavvisande yttermaterial.</li>
-                        <li>Innerficka med dragkedja.</li>
-                        <li>Justerbar huva för extra skydd.</li>
+                        <li>Justerbar midja för optimal passform.</li>
+                        <li>Elegant, diskret design.</li>
                     </ul>
                 </div>
             </div>
@@ -106,11 +79,11 @@
         <section class="ytterligare-info">
             <div class="detalj-block">
                 <h3>Specifikationer</h3>
-                <p>Material: 100% Polyester. Vattentät beläggning.</p>
+                <p>Material: Yttre: 100% Polyester. Foder: 100% Polyester.</p>
             </div>
             <div class="detalj-block">
                 <h3>Passform & Storlek</h3>
-                <p>Regular Fit (Normal passform). Herr-modell.</p>
+                <p>Regular Fit (Herr). Vänligen se storleksguide.</p>
             </div>
             <div class="detalj-block">
                 <h3>Returer & Byte</h3>
@@ -119,90 +92,8 @@
         </section>
 
     </main>
-
-    <footer class="footer"></footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const CART_STORAGE_KEY = 'shoppingCart';
-
-            function getCart() {
-                try {
-                    const cart = JSON.parse(localStorage.getItem(CART_STORAGE_KEY));
-                    return Array.isArray(cart) ? cart : [];
-                } catch {
-                    return [];
-                }
-            }
-
-            function saveCart(cart) {
-                localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
-            }
-
-            function showPopup(message, className) {
-                const existingPopup = document.getElementById('dynamic-popup');
-                if (existingPopup) existingPopup.remove();
-
-                const popup = document.createElement('div');
-                popup.id = 'dynamic-popup';
-                popup.classList.add(className);
-                popup.textContent = message;
-                document.body.appendChild(popup);
-
-                setTimeout(() => {
-                    popup.remove();
-                }, 3000);
-            }
-
-            document.querySelectorAll('.farg-knapp').forEach(button => {
-                button.addEventListener('click', function() {
-                    document.querySelectorAll('.farg-knapp').forEach(btn => btn.classList.remove('aktiv'));
-                    this.classList.add('aktiv');
-                    const valdFargElement = document.getElementById('vald-farg');
-                    if (valdFargElement) valdFargElement.textContent = this.dataset.farg;
-                });
-            });
-
-            document.querySelectorAll('.storlek-knapp').forEach(button => {
-                if (!button.disabled) {
-                    button.addEventListener('click', function() {
-                        document.querySelectorAll('.storlek-knapp').forEach(btn => btn.classList.remove('aktiv'));
-                        this.classList.add('aktiv');
-                    });
-                }
-            });
-
-            const addToCartButton = document.querySelector('.btn-laggtill');
-            if (addToCartButton) {
-                addToCartButton.addEventListener('click', () => {
-                    const selectedSize = document.querySelector('.storlek-knapp.aktiv');
-                    const selectedColor = document.querySelector('.farg-knapp.aktiv');
-                    const productTitle = document.querySelector('.produkt-titel')?.textContent || 'Okänd Produkt';
-                    const productPrice = document.querySelector('.produkt-pris')?.textContent || '0 SEK';
-
-                    if (!selectedSize || !selectedColor) {
-                        alert('Vänligen välj både färg och storlek innan du lägger till i kundvagnen.');
-                        return;
-                    }
-
-                    const item = {
-                        id: Date.now(),
-                        name: productTitle,
-                        size: selectedSize.textContent.trim(),
-                        color: selectedColor.dataset.farg,
-                        price: productPrice,
-                        quantity: 1
-                    };
-
-                    const cart = getCart();
-                    cart.push(item);
-                    saveCart(cart);
-
-                    showPopup('Produkten har lagts till i kundvagnen!', 'produkt-köpt');
-                });
-            }
-        });
-    </script>
+    <script src="footer.js" defer></script>
+    <script src="produkt.js" defer></script>
 </body>
 
 </html>
