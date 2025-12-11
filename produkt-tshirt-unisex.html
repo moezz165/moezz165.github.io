@@ -23,7 +23,7 @@
 
         <section class="produkt-detaljer">
             <div class="produkt-bilder">
-                <img src="tshirtunisex-600.WebP" alt="T-shirt UNISEX" class="huvudbild" />
+                <img src="Images/tshirtunisex.jpg" alt="T-shirt UNISEX" class="huvudbild" id="produktHuvudbild" />
             </div>
 
             <div class="produkt-info">
@@ -37,8 +37,14 @@
                 <div class="valjare farg-valjare">
                     <h4>Färg: <span id="vald-farg">Rosa</span></h4>
                     <div class="valj-alternativ">
-                        <button class="farg-knapp aktiv" style="background-color: #FFC0CB; border: 2px solid black;" data-farg="Rosa" aria-label="Välj rosa färg"></button>
-                        <button class="farg-knapp" style="background-color: white;" data-farg="Vit" aria-label="Välj vit färg"></button>
+                        <button class="farg-knapp aktiv" style="background-color: #FFC0CB; border: 2px solid black;" 
+                                data-farg="Rosa" 
+                                data-img="Images/tshirtunisex.jpg" 
+                                aria-label="Välj rosa färg"></button>
+                        <button class="farg-knapp" style="background-color: white;" 
+                                data-farg="Vit" 
+                                data-img="Images/tshirtunisexV.jpg" 
+                                aria-label="Välj vit färg"></button>
                     </div>
                 </div>
 
@@ -90,8 +96,8 @@
 
     </main>
 
- <script src="footer.js" defer></script>
-<script src="add-to-cart.js" defer></script>
+    <script src="footer.js" defer></script>
+    <script src="add-to-cart.js" defer></script>
 </body>
 
 </html>

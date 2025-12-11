@@ -14,7 +14,7 @@
         <h1 class="brand">ELEGANZA</h1>
         <p class="slogan">DRESS FOR CONFIDENCE</p>
     </header>
-   <script src="navbar.js" defer></script>
+    <script src="navbar.js" defer></script>
 
     <main class="produkt-container">
         <div class="breadcrumbs">
@@ -23,7 +23,7 @@
 
         <section class="produkt-detaljer">
             <div class="produkt-bilder">
-                <img src="piketröja-600.WebP" alt="Pikétröjor Herr" class="huvudbild" />
+                <img src="Images/piketroja.jpg" alt="Pikétröjor Herr" class="huvudbild" id="produktHuvudbild" />
             </div>
 
             <div class="produkt-info">
@@ -37,8 +37,14 @@
                 <div class="valjare farg-valjare">
                     <h4>Färg: <span id="vald-farg">Grå</span></h4>
                     <div class="valj-alternativ">
-                        <button class="farg-knapp aktiv" style="background-color: #A9A9A9; border: 2px solid black;" data-farg="Grå" aria-label="Välj grå färg"></button>
-                        <button class="farg-knapp" style="background-color: navy;" data-farg="Navy" aria-label="Välj mörkblå färg"></button>
+                        <button class="farg-knapp aktiv" style="background-color: #A9A9A9; border: 2px solid black;" 
+                                data-farg="Grå" 
+                                data-img="Images/piketroja.jpg" 
+                                aria-label="Välj grå färg"></button>
+                        <button class="farg-knapp" style="background-color: navy;" 
+                                data-farg="Navy" 
+                                data-img="Images/piketrojaNV.jpg" 
+                                aria-label="Välj mörkblå färg"></button>
                     </div>
                 </div>
 
@@ -91,8 +97,8 @@
 
     </main>
 
- <script src="footer.js" defer></script>
-<script src="add-to-cart.js" defer></script>
+    <script src="footer.js" defer></script>
+    <script src="add-to-cart.js" defer></script>
 </body>
 
 </html>

@@ -23,7 +23,7 @@
 
         <section class="produkt-detaljer">
             <div class="produkt-bilder">
-                <img src="tröja-600.WebP" alt="Tröja UNISEX" class="huvudbild" />
+                <img src="Images/troja.jpg" alt="Tröja UNISEX" class="huvudbild" id="produktHuvudbild" />
             </div>
 
             <div class="produkt-info">
@@ -37,9 +37,18 @@
                 <div class="valjare farg-valjare">
                     <h4>Färg: <span id="vald-farg">Vit</span></h4>
                     <div class="valj-alternativ">
-                        <button class="farg-knapp aktiv" style="background-color: white; border: 2px solid black;" data-farg="Vit" aria-label="Välj vit färg"></button>
-                        <button class="farg-knapp" style="background-color: #A9A9A9;" data-farg="Grå" aria-label="Välj grå färg"></button>
-                        <button class="farg-knapp" style="background-color: black;" data-farg="Svart" aria-label="Välj svart färg"></button>
+                        <button class="farg-knapp aktiv" style="background-color: white; border: 2px solid black;" 
+                                data-farg="Vit" 
+                                data-img="Images/troja.jpg" 
+                                aria-label="Välj vit färg"></button>
+                        <button class="farg-knapp" style="background-color: #A9A9A9;" 
+                                data-farg="Grå" 
+                                data-img="Images/trojaG.jpg" 
+                                aria-label="Välj grå färg"></button>
+                        <button class="farg-knapp" style="background-color: black;" 
+                                data-farg="Svart" 
+                                data-img="Images/trojaS.jpg" 
+                                aria-label="Välj svart färg"></button>
                     </div>
                 </div>
 
@@ -91,8 +100,8 @@
         </section>
 
     </main>
- <script src="footer.js" defer></script>
-<script src="add-to-cart.js" defer></script>
+    <script src="footer.js" defer></script>
+    <script src="add-to-cart.js" defer></script>
     
 </body>
 

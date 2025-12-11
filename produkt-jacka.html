@@ -23,7 +23,7 @@
 
         <section class="produkt-detaljer">
             <div class="produkt-bilder">
-                <img src="jacka-600.WebP" alt="Jacka Herr" class="huvudbild" />
+                <img src="Images/jacka.WebP.jpg" alt="Jacka Herr" class="huvudbild" id="produktHuvudbild" />
             </div>
 
             <div class="produkt-info">
@@ -37,9 +37,18 @@
                 <div class="valjare farg-valjare">
                     <h4>Färg: <span id="vald-farg">Svart</span></h4>
                     <div class="valj-alternativ">
-                        <button class="farg-knapp aktiv" style="background-color: black; border: 2px solid white;" data-farg="Svart" aria-label="Välj svart färg"></button>
-                        <button class="farg-knapp" style="background-color: lightblue;" data-farg="Ljusblå" aria-label="Välj ljusblå färg"></button>
-                        <button class="farg-knapp" style="background-color: darkslategrey;" data-farg="Mörkgrå" aria-label="Välj mörkgrå färg"></button>
+                        <button class="farg-knapp aktiv" style="background-color: black; border: 2px solid white;" 
+                                data-farg="Svart" 
+                                data-img="Images/jacka.webp.jpg " 
+                                aria-label="Välj svart färg"></button>
+                        <button class="farg-knapp" style="background-color: lightblue;" 
+                                data-farg="Ljusblå" 
+                                data-img="Images/jackaLB.jpg" 
+                                aria-label="Välj ljusblå färg"></button>
+                        <button class="farg-knapp" style="background-color: darkslategrey;" 
+                                data-farg="Mörkgrå" 
+                                data-img="Images/jackaMB.jpg" 
+                                aria-label="Välj mörkgrå färg"></button>
                     </div>
                 </div>
 
@@ -92,8 +101,8 @@
         </section>
 
     </main>
- <script src="footer.js" defer></script>
-<script src="add-to-cart.js" defer></script>
+    <script src="footer.js" defer></script>
+    <script src="add-to-cart.js" defer></script>
 </body>
 
 </html>

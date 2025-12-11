@@ -23,7 +23,7 @@
 
         <section class="produkt-detaljer">
             <div class="produkt-bilder">
-                <img src="tshirtman-600.WebP" alt="T-Shirt Herr" class="huvudbild" />
+                <img src="Images/tshirtman.jpg" alt="T-Shirt Herr" class="huvudbild" id="produktHuvudbild" />
             </div>
 
             <div class="produkt-info">
@@ -37,8 +37,14 @@
                 <div class="valjare farg-valjare">
                     <h4>Färg: <span id="vald-farg">Svart</span></h4>
                     <div class="valj-alternativ">
-                        <button class="farg-knapp aktiv" style="background-color: black; border: 2px solid white;" data-farg="Svart" aria-label="Välj svart färg"></button>
-                        <button class="farg-knapp" style="background-color: white;" data-farg="Vit" aria-label="Välj vit färg"></button>
+                        <button class="farg-knapp aktiv" style="background-color: black; border: 2px solid white;" 
+                                data-farg="Svart" 
+                                data-img="Images/tshirtman.jpg" 
+                                aria-label="Välj svart färg"></button>
+                        <button class="farg-knapp" style="background-color: white;" 
+                                data-farg="Vit" 
+                                data-img="Images/tshirtmanS.jpg" 
+                                aria-label="Välj vit färg"></button>
                     </div>
                 </div>
 
@@ -90,8 +96,8 @@
         </section>
 
     </main>
- <script src="footer.js" defer></script>
-<script src="add-to-cart.js" defer></script>
+    <script src="footer.js" defer></script>
+    <script src="add-to-cart.js" defer></script>
     
 </body>
 

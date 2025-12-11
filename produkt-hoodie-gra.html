@@ -23,7 +23,7 @@
 
         <section class="produkt-detaljer">
             <div class="produkt-bilder">
-                <img src="hoodiegrå-600.WebP" alt="Hoodie grå UNISEX" class="huvudbild" />
+                <img src="Images/hoodieS.jpg" alt="Hoodie grå UNISEX" class="huvudbild" id="produktHuvudbild" />
             </div>
 
             <div class="produkt-info">
@@ -37,8 +37,14 @@
                 <div class="valjare farg-valjare">
                     <h4>Färg: <span id="vald-farg">Grå</span></h4>
                     <div class="valj-alternativ">
-                        <button class="farg-knapp" style="background-color: black; border: 2px solid white;" data-farg="Svart" aria-label="Välj svart färg"></button>
-                        <button class="farg-knapp aktiv" style="background-color: #A9A9A9; border: 2px solid black;" data-farg="Grå" aria-label="Välj grå färg"></button>
+                        <button class="farg-knapp" style="background-color: black; border: 2px solid white;" 
+                                data-farg="Svart" 
+                                data-img="Images/hoodieS.jpg" 
+                                aria-label="Välj svart färg"></button>
+                        <button class="farg-knapp aktiv" style="background-color: #A9A9A9; border: 2px solid black;" 
+                                data-farg="Grå" 
+                                data-img="Images/hoodie.jpg" 
+                                aria-label="Välj grå färg"></button>
                     </div>
                 </div>
 
@@ -93,21 +99,19 @@
 
 <script src="footer.js" defer></script>
     <div id="popup-cart" class="popup">
-  <div class="popup-content">
-    <p>Produkten har lagts i kundvagnen!</p>
-    <button id="close-cart-popup">Stäng</button>
-  </div>
+    <div class="popup-content">
+      <p>Produkten har lagts i kundvagnen!</p>
+      <button id="close-cart-popup">Stäng</button>
+    </div>
 </div>
 
 <div id="popup-checkout" class="popup">
-  <div class="popup-content">
-    <p>Tack för ditt köp! En bekräftelse har skickats till <span id="email-confirm"></span>.</p>
-    <button id="close-checkout-popup">Stäng</button>
-  </div>
+    <div class="popup-content">
+      <p>Tack för ditt köp! En bekräftelse har skickats till <span id="email-confirm"></span>.</p>
+      <button id="close-checkout-popup">Stäng</button>
+    </div>
 </div>
-
+<script src="add-to-cart.js" defer></script>
 </body>
 
 </html>
- <script src="footer.js" defer></script>
-<script src="add-to-cart.js" defer></script>
