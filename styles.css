@@ -14,11 +14,6 @@
     --accent-dark: #7a9fa0;
     --label-color: #adb5bd;
     --font-family: 'Times New Roman', Times, serif;
-    --nike-price: #cc0000;
-    --success-bg: var(--card);
-    --success-text: var(--accent);
-    --success-border: var(--accent);
-    --success-shadow-glow: rgba(168, 218, 220, 0.6);
 }
 
 body {
@@ -566,7 +561,6 @@ img:hover {
     text-decoration: underline;
 }
 
-
 .popup-overlay-animated {
     position: fixed;
     top: 0;
@@ -613,9 +607,8 @@ img:hover {
     transform: scale(1);
 }
 
-
 .popup-box-animated h3 {
-    margin-bottom: 5px; 
+    margin-bottom: 5px;
     font-family: 'Times New Roman', Times, serif;
     font-weight: 600;
     font-size: 1.3em;
@@ -623,10 +616,8 @@ img:hover {
     word-wrap: break-word;
 }
 
-
 .popup-box-animated button,
-.popup-box-animated a.btn { 
-
+.popup-box-animated a.btn {
     width: 100%;
     background-color: var(--accent);
     color: var(--dark);
@@ -637,9 +628,9 @@ img:hover {
     font-size: 1em;
     font-weight: 700;
     text-transform: uppercase;
-    text-decoration: none; 
+    text-decoration: none;
     transition: background 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
-    display: block; 
+    display: block;
 }
 
 .popup-box-animated button:hover,
@@ -649,10 +640,8 @@ img:hover {
     box-shadow: 0 0 15px var(--accent);
 }
 
-
 .popup-box-animated a.btn {
-
-    margin-top: 0; 
+    margin-top: 0;
     border: 2px solid var(--accent);
     background-color: var(--card);
     color: var(--accent);
@@ -663,7 +652,6 @@ img:hover {
     color: var(--dark);
     box-shadow: 0 0 15px var(--accent);
 }
-
 
 .container {
     max-width: 900px;
@@ -847,7 +835,7 @@ img:hover {
         flex: 1;
         margin-top: 0;
     }
-    
+
     .produkt-titel {
         font-size: 2em;
     }
@@ -897,10 +885,130 @@ img:hover {
     .product-detail-container {
         padding: 1.5rem;
     }
-    
+
     .popup-box-animated {
         padding: 20px;
         min-width: unset;
         width: 95%;
     }
+}
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 5px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .cart-item button {
+            margin-left: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #555;
+        }
+   #dynamic-popup {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        .produkt-köpt {
+            opacity: 1 !important;
+        }
+.popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.popup-box {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 20px black;
+
+    width: auto;             
+    max-width: 90%;          
+    min-width: 300px;        
+    max-height: 80vh;        
+    overflow-y: auto;        
+}
+
+.popup-box h3 {
+    margin-bottom: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 600;
+    font-size: 1.5em;
+    color: black;
+    word-wrap: break-word;   
+}
+
+.popup-box button {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.popup-box button:hover {
+    background-color: turquoise;
+}
+
+.payment-options {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.payment-options label {
+    display: block;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    text-align: left;
+    font-weight: 500;
+}
+
+.payment-options label:last-child {
+    border-bottom: none;
+}
+
+.payment-options input[type="radio"] {
+    margin-right: 10px;
+}
+
+.card-fields input {
+    margin-bottom: 10px;
 }

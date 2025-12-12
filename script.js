@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const CART_STORAGE_KEY = 'shoppingCart';
+    const cartItemsDiv = document.getElementById('cart-items-container');
+    const totalP = document.getElementById('total');
 
     function getCart() {
         try {
@@ -12,117 +14,261 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function saveCart(cart) {
         localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+        if (cartItemsDiv) renderCart();
     }
 
-    function showPopup(message, className) {
+    function parsePrice(priceText) {
+        let price = priceText.toString().replace(/[^\d\.,]/g, '');
+        if (price.includes(',')) price = price.replace(',', '.');
+        return parseFloat(price) || 0;
+    }
+
+    function showCartPopup(message, className) {
         const existingPopup = document.getElementById('dynamic-popup');
         if (existingPopup) existingPopup.remove();
+        const overlay = document.createElement('div');
+        overlay.id = 'dynamic-popup';
+        overlay.classList.add('popup-overlay-animated', 'fade-in', className);
+        const box = document.createElement('div');
+        box.classList.add('popup-box-animated');
+        const msg = document.createElement('h3');
+        msg.innerHTML = message;
+        const closeBtn = document.createElement('button');
+        closeBtn.textContent = 'Fortsätt handla';
+        const cartLink = document.createElement('a');
+        cartLink.href = 'kundvagn.html';
+        cartLink.textContent = 'Gå till kundvagn';
+        cartLink.classList.add('btn');
+        box.appendChild(msg);
+        box.appendChild(cartLink);
+        box.appendChild(closeBtn);
+        overlay.appendChild(box);
+        document.body.appendChild(overlay);
 
-        const popup = document.createElement('div');
-        popup.id = 'dynamic-popup';
-        popup.classList.add(className);
-        popup.innerHTML = message;
-        document.body.appendChild(popup);
+        function removePopup() {
+            overlay.classList.remove('fade-in');
+            overlay.classList.add('fade-out');
+            setTimeout(() => { overlay.remove(); }, 300);
+        }
 
-        setTimeout(() => {
-            popup.remove();
-        }, 3000);
-    }
-
-    const productForm = document.getElementById('productForm');
-    const popup = document.getElementById('popup');
-
-    if (productForm) {
-        productForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const cart = getCart();
-            cart.push({ id: Date.now(), name: "Generisk produkt", quantity: 1 });
-            saveCart(cart);
-
-            if (popup) {
-                popup.textContent = 'Produkt lades till i kundvagnen.';
-                popup.classList.add('show');
-
-                setTimeout(() => {
-                    popup.classList.remove('show');
-                }, 3000);
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay || e.target === closeBtn) {
+                removePopup();
             }
         });
+        setTimeout(removePopup, 3000);
     }
 
-    document.querySelectorAll('.farg-knapp').forEach(button => {
-        button.addEventListener('click', function() {
-            document.querySelectorAll('.farg-knapp').forEach(btn => btn.classList.remove('aktiv'));
-            this.classList.add('aktiv');
-
-            const valdFargElement = document.getElementById('vald-farg');
-            if (valdFargElement) {
-                valdFargElement.textContent = this.dataset.farg;
-            }
+    function createPopup(message, buttonText, action) {
+        const overlay = document.createElement('div');
+        overlay.classList.add('popup-overlay-animated');
+        overlay.id = 'generic-popup';
+        const box = document.createElement('div');
+        box.classList.add('popup-box-animated');
+        const msg = document.createElement('h3');
+        msg.innerHTML = message;
+        const btn = document.createElement('button');
+        btn.textContent = buttonText;
+        btn.addEventListener('click', () => {
+            overlay.classList.add('fade-out');
+            setTimeout(() => {
+                overlay.remove();
+                if (action) action();
+            }, 300);
         });
-    });
+        box.appendChild(msg);
+        box.appendChild(btn);
+        overlay.appendChild(box);
+        document.body.appendChild(overlay);
+        requestAnimationFrame(() => { overlay.classList.add('fade-in'); });
+    }
 
-    document.querySelectorAll('.storlek-knapp').forEach(button => {
-        if (!button.disabled) {
-            button.addEventListener('click', function() {
-                document.querySelectorAll('.storlek-knapp').forEach(btn => btn.classList.remove('aktiv'));
-                this.classList.add('aktiv');
+    function renderCart() {
+        if (!cartItemsDiv || !totalP) return;
+        const cart = getCart();
+        cartItemsDiv.innerHTML = "";
+        let total = 0;
+        if (cart.length === 0) {
+            cartItemsDiv.innerHTML = "<p>Kundvagnen är tom.</p>";
+        } else {
+            cart.forEach((item, index) => {
+                let priceValue = parsePrice(item.price || '0');
+                let itemQuantity = item.quantity || 1;
+                total += priceValue * itemQuantity;
+                const itemDiv = document.createElement("div");
+                itemDiv.className = "cart-item";
+                itemDiv.innerHTML = `
+                    <span>${itemQuantity} x ${item.name} (${item.color || ''}, ${item.size || ''}) - ${(priceValue * itemQuantity).toFixed(2)}kr</span>
+                    <button data-index="${index}" class="remove-item-btn">Ta bort</button>
+                `;
+                cartItemsDiv.appendChild(itemDiv);
+            });
+            document.querySelectorAll('.remove-item-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    removeItem(parseInt(this.dataset.index));
+                });
             });
         }
-    });
+        totalP.textContent = `Total: ${total.toFixed(2)}kr`;
+    }
 
-    const addToCartButtonNew = document.querySelector('.btn-laggtill');
-    if (addToCartButtonNew) {
-        addToCartButtonNew.addEventListener('click', function() {
-            const selectedSize = document.querySelector('.storlek-knapp.aktiv');
-            const selectedColor = document.querySelector('.farg-knapp.aktiv');
-            const productTitle = document.querySelector('.produkt-titel')?.textContent || 'Okänd Produkt';
-            const productPrice = document.querySelector('.produkt-pris')?.textContent || '0 SEK';
+    window.removeItem = function(index) {
+        let cart = getCart();
+        cart.splice(index, 1);
+        saveCart(cart);
+    }
 
-            if (!selectedSize || !selectedColor) {
-                alert('Vänligen välj både färg och storlek innan du lägger till i kundvagnen.');
-                return;
-            }
-
-            const item = {
-                id: Date.now(),
-                name: productTitle,
-                size: selectedSize.textContent.trim(),
-                color: selectedColor.dataset.farg,
-                price: productPrice,
-                quantity: 1
-            };
-
-            const cart = getCart();
-            cart.push(item);
-            saveCart(cart);
-
-            showPopup('Produkten har lagts till i kundvagnen!', 'produkt-köpt');
+    if (document.getElementById("clear-cart")) {
+        document.getElementById("clear-cart").addEventListener("click", () => {
+            saveCart([]);
         });
     }
 
-    const payform = document.querySelector('.payform');
-    if (payform) {
-        payform.addEventListener('submit', function(e) {
-            e.preventDefault();
+    if (cartItemsDiv) renderCart();
 
-            const emailInput = payform.querySelector('input[type="email"]');
-            const userEmail = emailInput ? emailInput.value : 'okänd@email.com';
+    const laggtillKnapp = document.querySelector('.btn-laggtill');
 
-            if (getCart().length === 0) {
-                showPopup('Din kundvagn är tom. Lägg till produkter först.', 'produkt-köpt');
+    if (laggtillKnapp) {
+        const fargKnappar = document.querySelectorAll('.farg-knapp');
+        const storlekKnappar = document.querySelectorAll('.storlek-knapp:not(:disabled)');
+        const valdFargSpan = document.getElementById('vald-farg');
+        const produktTitelElement = document.querySelector('.produkt-titel');
+        const produktPrisElement = document.querySelector('.produkt-pris');
+        const huvudbild = document.getElementById('produktHuvudbild');
+        if (!produktTitelElement || !produktPrisElement) return;
+
+        const produktTitel = produktTitelElement.textContent.trim();
+        const produktPrisText = produktPrisElement.textContent.trim();
+        const produktPris = parsePrice(produktPrisText);
+
+        let valdFarg = valdFargSpan?.textContent.trim() || document.querySelector('.farg-knapp.aktiv')?.getAttribute('data-farg') || 'Svart';
+        let valdStorlek = document.querySelector('.storlek-knapp.aktiv')?.textContent.trim() || 'M';
+
+        if (!document.querySelector('.storlek-knapp.aktiv') && storlekKnappar.length > 0) {
+            const defaultButton = Array.from(storlekKnappar).find(b => b.textContent.trim() === 'M') || storlekKnappar[0];
+            defaultButton.classList.add('aktiv');
+            valdStorlek = defaultButton.textContent.trim();
+        }
+
+        fargKnappar.forEach(knapp => {
+            knapp.addEventListener('click', function() {
+                fargKnappar.forEach(k => k.classList.remove('aktiv'));
+                this.classList.add('aktiv');
+                valdFarg = this.getAttribute('data-farg');
+                if (valdFargSpan) valdFargSpan.textContent = valdFarg;
+                const nyBildSrc = this.getAttribute('data-img');
+                if (huvudbild && nyBildSrc) {
+                    huvudbild.setAttribute('src', nyBildSrc);
+                    huvudbild.setAttribute('alt', `${produktTitel} (${valdFarg})`);
+                }
+            });
+        });
+
+        storlekKnappar.forEach(knapp => {
+            knapp.addEventListener('click', function() {
+                storlekKnappar.forEach(k => k.classList.remove('aktiv'));
+                this.classList.add('aktiv');
+                valdStorlek = this.textContent.trim();
+            });
+        });
+
+        laggtillKnapp.addEventListener('click', () => {
+            if (!valdFarg || !valdStorlek) {
+                alert("Vänligen välj både färg och storlek.");
                 return;
             }
+            const cart = getCart();
+            const produktId = `${produktTitel}-${valdFarg}-${valdStorlek}`;
+            const aktuellProduktBild = huvudbild ? huvudbild.getAttribute('src') : '';
+            const befintligArtikel = cart.find(item => item.id === produktId);
 
-            localStorage.removeItem(CART_STORAGE_KEY);
-
-            const successMessage = `Tack för din betalning! En bekräftelse skickas till ${userEmail}.`;
-            showPopup(successMessage, 'produkt-köpt');
-
-            if (emailInput) {
-                emailInput.value = '';
+            if (befintligArtikel) {
+                befintligArtikel.quantity += 1;
+            } else {
+                const nyArtikel = {
+                    id: produktId,
+                    name: produktTitel,
+                    color: valdFarg,
+                    size: valdStorlek,
+                    price: produktPris,
+                    image: aktuellProduktBild,
+                    quantity: 1
+                };
+                cart.push(nyArtikel);
             }
+            saveCart(cart);
+            showCartPopup(`Lades till i kundvagnen:<br><b>${produktTitel}</b><br>(${valdFarg}, ${valdStorlek})`, 'produkt-köpt');
+        });
+    }
+
+    document.querySelectorAll('.add-to-cart-simple').forEach(button => {
+        button.addEventListener('click', (event) => {
+            event.preventDefault();
+            const card = event.target.closest('.card');
+            if (!card) return;
+            const productTitle = card.querySelector('h3')?.textContent || 'Okänd Produkt';
+            const productPrice = parsePrice(card.dataset.pris || '0');
+            const productVariant = card.dataset.variant || 'Svart / M';
+            const productImgSrc = card.querySelector('img')?.getAttribute('src') || '';
+            const [color, size] = productVariant.split(' / ').map(s => s.trim());
+            const produktId = `${productTitle}-${color}-${size}`;
+            const cart = getCart();
+            const befintligArtikel = cart.find(item => item.id === produktId);
+
+            if (befintligArtikel) {
+                befintligArtikel.quantity += 1;
+            } else {
+                const nyArtikel = {
+                    id: produktId,
+                    name: productTitle,
+                    size: size,
+                    color: color,
+                    price: productPrice,
+                    image: productImgSrc,
+                    quantity: 1
+                };
+                cart.push(nyArtikel);
+            }
+            saveCart(cart);
+            showCartPopup(`Lades till i kundvagnen:<br><b>${productTitle}</b><br>(${color}, ${size})`, 'produkt-köpt');
+        });
+    });
+
+    const payForm = document.getElementById('payForm') || document.querySelector('.payform');
+    const emailInput = document.querySelector('input[name="email"]');
+    const paymentMethodInputs = document.querySelectorAll('input[name="payment_method"]');
+    const cardFields = document.getElementById('cardFields');
+    const payButton = payForm ? payForm.querySelector('button[type="submit"]') : null;
+
+    function updatePaymentView() {
+        if (!payForm) return;
+        const checkedMethod = document.querySelector('input[name="payment_method"]:checked');
+        const method = checkedMethod ? checkedMethod.value : 'card';
+        if (cardFields) { cardFields.style.display = (method === 'card') ? 'block' : 'none'; }
+        if (payButton) {
+            payButton.textContent = method === 'card' ? 'Betala med kort' :
+                                    method === 'applepay' ? 'Gå till Apple Pay' :
+                                    method === 'paypal' ? 'Gå till PayPal' :
+                                    method === 'klarna' ? 'Gå till Klarna' : 'Betala';
+        }
+    }
+
+    paymentMethodInputs.forEach(input => input.addEventListener('change', updatePaymentView));
+    if (payForm) updatePaymentView();
+
+    if (payForm) {
+        payForm.addEventListener('submit', e => {
+            e.preventDefault();
+            const cart = getCart();
+            if (cart.length === 0) {
+                createPopup('Vänligen lägg till varor i kundvagnen', 'Hem', () => { window.location.href = 'index.html'; });
+                return;
+            }
+            const email = emailInput ? emailInput.value : 'okänd@email.com';
+            createPopup(`Betalning genomförd!<br>En bekräftelse skickas till <b>${email}</b>`, 'Hem', () => {
+                window.location.href = 'index.html';
+            });
+            localStorage.removeItem(CART_STORAGE_KEY);
         });
     }
 });
