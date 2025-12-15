@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const metaCharset = document.createElement('meta');
     metaCharset.setAttribute('charset', 'UTF-8');
-    head.prepend(metaCharset); 
+    head.prepend(metaCharset);
 
     const metaViewport = document.createElement('meta');
     metaViewport.setAttribute('name', 'viewport');
@@ -30,14 +30,15 @@ document.addEventListener('DOMContentLoaded', () => {
     link.href = 'styles.css';
     head.appendChild(link);
 
-
     const nav = document.createElement('nav');
     nav.classList.add('main-nav');
+
+    const linkContainer = document.createElement('div');
+    linkContainer.classList.add('nav-links');
 
     const links = [
         ["index.html", "Hem"],
         ["produkter.html", "Produkter"],
-        ["kundvagn.html", "Kundvagn"],
         ["betalning.html", "Betalning"],
         ["policy.html", "Policy"],
         ["om-oss.html", "Om oss"],
@@ -48,13 +49,27 @@ document.addEventListener('DOMContentLoaded', () => {
         const a = document.createElement('a');
         a.href = linkData[0];
         a.textContent = linkData[1];
-        nav.appendChild(a);
+        linkContainer.appendChild(a);
     });
+
+    nav.appendChild(linkContainer);
+
+    const navActionsRight = document.createElement('div');
+    navActionsRight.classList.add('navigation-bar', 'nav-actions-right');
+
+    const cartIcon = document.createElement('a');
+    cartIcon.href = 'kundvagn.html';
+    cartIcon.classList.add('action-icon', 'large-cart');
+    cartIcon.setAttribute('aria-label', 'Kundvagn/Kasse');
+    cartIcon.textContent = '🛒';
+
+    navActionsRight.appendChild(cartIcon);
+
+    nav.appendChild(navActionsRight);
 
     if (document.body) {
         document.body.prepend(nav);
     }
-
 
     const footerData = {
         heading: "Kontakt",

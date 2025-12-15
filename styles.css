@@ -1012,3 +1012,6 @@ img:hover {
 .card-fields input {
     margin-bottom: 10px;
 }
+.action-icon.large-cart {
+    font-size: 1.5em;
+}
